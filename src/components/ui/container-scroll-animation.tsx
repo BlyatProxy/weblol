@@ -27,16 +27,16 @@ export const ContainerScroll = ({
   }, []);
 
   const scaleDimensions = () => {
-    return isMobile ? [0.8, 0.95] : [1.1, 1];
+    return isMobile ? [0.7, 0.85] : [1.1, 1];
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [25, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center relative py-20 px-4 md:px-20"
+      className="min-h-screen flex items-center justify-center relative py-10 sm:py-20 px-4 sm:px-8 md:px-20"
       ref={containerRef}
     >
       <AnimatePresence>
@@ -46,7 +46,7 @@ export const ContainerScroll = ({
           exit={{ opacity: 0, y: -30 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
           viewport={{ once: false }}
-          className="py-12 md:py-24 w-full relative"
+          className="py-8 sm:py-12 md:py-24 w-full relative"
           style={{
             perspective: "1500px",
           }}
@@ -69,17 +69,18 @@ export const ContainerScroll = ({
                 whileInView={{ rotate: 0 }}
                 transition={{ type: "spring", duration: 1.5 }}
                 style={{ 
-                  width: "350px",
+                  width: isMobile ? "200px" : "350px",
                   height: "auto",
                   position: "absolute",
-                  left: "-150px", 
+                  left: isMobile ? "-50px" : "-150px", 
                   top: "65%",
                   transform: "translateY(-50%)",
                   objectFit: "cover",
                   cursor: "grab",
                   borderRadius: "12px",
                   border: "3px solid rgba(0, 0, 0, 0.9)",
-                  boxShadow: "0 0 25px rgba(0, 0, 0, 0.8)"
+                  boxShadow: "0 0 25px rgba(0, 0, 0, 0.8)",
+                  display: isMobile ? "none" : "block"
                 }}
               />
 
@@ -94,17 +95,18 @@ export const ContainerScroll = ({
                 whileInView={{ rotate: 0 }}
                 transition={{ type: "spring", duration: 1.5 }}
                 style={{
-                  width: "350px",
+                  width: isMobile ? "200px" : "350px",
                   height: "auto",
                   position: "absolute",
-                  right: "-150px",
+                  right: isMobile ? "-50px" : "-150px",
                   top: "45%",
                   transform: "translateY(-50%) perspective(500px) rotateY(-15deg)",
                   objectFit: "cover", 
                   cursor: "grab",
                   borderRadius: "12px",
                   border: "3px solid rgba(0, 0, 0, 0.9)",
-                  boxShadow: "0 0 25px rgba(0, 0, 0, 0.8)"
+                  boxShadow: "0 0 25px rgba(0, 0, 0, 0.8)",
+                  display: isMobile ? "none" : "block"
                 }}
               />
             </div>
@@ -131,7 +133,7 @@ export const Header = ({
       style={{
         translateY: translate,
       }}
-      className="max-w-6xl mx-auto text-center mb-12"
+      className="max-w-6xl mx-auto text-center mb-8 sm:mb-12"
     >
       {titleComponent}
     </motion.div>
@@ -159,7 +161,7 @@ export const Card = ({
         boxShadow:
           "0 0 0 2px rgba(0, 0, 0, 0.3), 0 10px 25px -5px rgba(0,0,0,0.8), 0 30px 50px -10px rgba(0,0,0,0.7)",
       }}
-      className="max-w-6xl -mt-8 mx-auto h-[35rem] md:h-[45rem] w-full border border-black p-3 md:p-8 bg-gradient-to-b from-black to-black rounded-3xl backdrop-blur-sm"
+      className="max-w-6xl -mt-4 sm:-mt-8 mx-auto h-[25rem] sm:h-[35rem] md:h-[45rem] w-full border border-black p-3 sm:p-6 md:p-8 bg-gradient-to-b from-black to-black rounded-3xl backdrop-blur-sm"
     >
       {children}
     </motion.div>
